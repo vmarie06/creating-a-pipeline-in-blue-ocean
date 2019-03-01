@@ -1,0 +1,24 @@
+---
+# Commentaire
+
+- hosts: "{{ group }}"
+  vars_prompt:
+          - name: "group"
+            prompt: "Question ?"
+            private: no
+
+  tasks:
+        - name: installation pip
+          apt:
+                  name: python-pip
+                  update_cache: true
+
+        - name: installation python
+          shell: 'pip install docker'
+
+        - name: Installation docker
+          docker_container:
+                name: alpine
+                image: alpine
+                state: started
+
