@@ -1,0 +1,17 @@
+---
+# Commentaire
+
+- hosts: "{{ group }}"
+  vars_prompt:
+          - name: "group"
+            prompt: "Question ?"
+            private: no
+
+  tasks:
+        - name: Construction programme
+          command: "{{ item }}"
+          with_items: 
+                - echo 'make'
+                - echo 'make check'
+          async: 120
+          poll: 10

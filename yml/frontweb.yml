@@ -1,0 +1,8 @@
+---
+# Commentaire
+
+        - name: frontweb
+          shell: echo 'frontweb'
+          register: command_output
+        - debug: msg="{{command_output.stdout}}"
+

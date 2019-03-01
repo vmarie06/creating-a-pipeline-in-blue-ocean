@@ -1,0 +1,41 @@
+---
+# Commentaire
+
+- hosts: server
+  vars:
+        auteur: vincent
+  tasks:
+        - file:
+                path: /home/vincent/serveur1
+                state: touch
+                mode: "777"
+                owner: vincent
+
+        - file:
+                path: /home/vincent/serveur2
+                state: touch
+                mode: "777"
+                owner: vincent
+
+- hosts: web
+  vars:
+        auteur: vincent
+  tasks:
+        - file:
+                path: '/home/vincent/web1'
+                state: touch
+                mode: '777'
+
+        - file:
+                path: '/home/vincent/web2'
+                state: touch
+                mode: '777'
+
+        - file:
+                src: '/home/vincent/{{ item.src }}'
+                dest: '/home/vincent/{{ item.dest }}'
+                state: link
+          with_items:
+                - { src: 'web1', dest: 's1' }
+                - { src: 'web2', dest: 's2' }
+

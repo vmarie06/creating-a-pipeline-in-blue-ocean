@@ -1,0 +1,24 @@
+---
+# Commentaire
+
+- hosts: "{{ group }}"
+  vars_prompt:
+          - name: "group"
+            prompt: "Question ?"
+            private: no
+
+  tasks:
+#       - name: Installation nginx
+#         apt:
+#               name: nginx
+#               update_cache: true
+
+        - name: desinstallation 
+          apt:
+                name: "{{ packages }}"
+#               state: absent
+                state: present
+          vars:
+                  packages:
+                          - vim
+                          - nginx

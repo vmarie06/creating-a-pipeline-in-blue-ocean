@@ -1,0 +1,59 @@
+---
+# Commentaire
+
+- hosts: server
+  vars:
+        auteur: vincent
+#        remote_user: root
+  tasks:
+        - name: premiere tache
+          template:
+                src: /home/vincent/exemple.txt
+                dest: /home/vincent/copy.txt
+
+        - name: COM#1
+          shell: "echo 'Bonjour' >> exemple.txt"
+          args: 
+                chdir: /home/vincent/
+                creates: exemple.txt
+          register: command_output
+        - debug: msg="{{command_output.stdout}}"
+
+        - file: 
+                path: /home/vincent/exemple.txt
+                owner: vincent
+                group: vincent
+
+        - name: Docker images
+          shell: docker images
+          register: command_output
+        - debug: msg="{{command_output}}"
+
+#       - name: Docker pull
+#         shell: docker pull alpine
+#         register: command_output
+#       - debug: msg="{{command_output}}"
+
+#       - name: Docker images
+#         shell: docker images
+#         register: command_output
+#       - debug: msg="{{command_output}}"
+
+        - file:
+                path: /tmp/x
+                state: touch
+                mode: "u+rw,g+r,o+r"
+
+        - file:
+                path: /tmp/z
+                state: touch
+                mode: "u+rw,g+r,o+r"
+
+        - file:
+                src: '/tmp/{{ item.src }}'
+                dest: '{{ item.dest }}'
+                state: link
+          with_items:
+                - { src: 'x', dest: 'y' }
+                - { src: 'z', dest: 'k' }
+

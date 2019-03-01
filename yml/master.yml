@@ -1,0 +1,6 @@
+---
+# Commentaire
+
+- hosts: server
+  roles:
+          - common

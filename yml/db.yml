@@ -1,0 +1,8 @@
+---
+# Commentaire
+
+        - name: db
+          shell: echo 'db'
+          register: command_output
+        - debug: msg="{{command_output.stdout}}"
+

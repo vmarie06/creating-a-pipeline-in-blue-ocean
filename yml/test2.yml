@@ -1,0 +1,7 @@
+---
+# Commentaire
+
+- hosts: server
+  tasks:
+          - include: /etc/ansible/db.yml
+          - include: /etc/ansible/frontweb.yml
